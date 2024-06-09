@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Input and Button Styles */
+        #inp {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        #btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* List Styles */
+        #list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        #list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        #list li:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Delete Button Styles */
+        .delete {
+            cursor: pointer;
+            color: #ff4d4d;
+            border: none;
+            background: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .delete:hover {
+            color: #ff1a1a;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>To-Do List</h1>
+    <div>
+        <input type="text" id="inp" placeholder="Add a new item">
+        <button id="btn">ADD</button>
+    </div>
+
+    <ul id="list"></ul>
+
+    <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                var newItem = $("#inp").val(); // Get input value
+                if (newItem.trim() !== "") { // Check if input is not empty
+                    var listItem = $("<li></li>").text(newItem); // Create a new list item
+                    var deleteButton = $("<button class='delete'>Delete</button>"); // Create a delete button
+
+                    // Append the delete button to the list item
+                    listItem.append(deleteButton);
+
+                    // Add the list item to the list
+                    $("#list").append(listItem);
+
+                    // Clear the input field
+                    $("#inp").val("");
+
+                    // Attach a click event to the delete button to remove the item
+                    deleteButton.click(function () {
+                        listItem.remove();
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
